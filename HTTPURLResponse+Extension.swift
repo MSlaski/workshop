@@ -2,6 +2,6 @@ import Foundation
 
 extension HTTPURLResponse {
   func isResponseOK() -> Bool {
-    return (200...299).contains(self.statusCode)
+    return (200...201).contains(self.statusCode)
   }
 }
