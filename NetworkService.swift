@@ -1,9 +1,8 @@
 import Foundation
 
 class NetworkService {
-  private(set) var remainingRequests: Int!
   
-  func request<T: Decodable>(router: Router, completion: @escaping(Result<T, Error>) -> Void) {
+  func request<T: Decodable>(router: Router, completion: @escaping(Result<T, NetworkError>) -> Void) {
     var components = URLComponents()
     components.scheme = router.scheme
     components.host = router.host
@@ -27,7 +26,6 @@ class NetworkService {
         return
       }
       
-      self.remainingRequests = self.checkRequestsLimit(for: httpResponse)
       guard let data = data else { return }
       do {
         let responseObject = try JSONDecoder().decode(T.self, from: data)
@@ -40,12 +38,6 @@ class NetworkService {
       }
     }
     dataTask.resume()
-  }
-  
-  private func checkRequestsLimit(for response: HTTPURLResponse) -> Int {
-    let remainingRequests = response.allHeaderFields["X-Ratelimit-Remaining"] as? String
-    guard let remaining = remainingRequests else { return 0 }
-    return remaining.asInt()
   }
   
 }
