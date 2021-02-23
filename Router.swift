@@ -26,14 +26,14 @@ enum Router {
     case .getRepos(let query, let page):
       return [
         URLQueryItem(name: "q", value: query),
-        URLQueryItem(name: "order", value: "desc"),
+        URLQueryItem(name: "order", value: "asc"),
         URLQueryItem(name: "sort", value: "stars"),
         URLQueryItem(name: "page", value: "\(page)")
       ]
     case .getAllUserRepos:
       return [
         URLQueryItem(name: "sort", value: "stars"),
-        URLQueryItem(name: "order", value: "desc")
+        URLQueryItem(name: "order", value: "asc")
       ]
     }
   }
