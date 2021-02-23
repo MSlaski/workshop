@@ -1,7 +1,7 @@
 import Foundation
 
 extension String {
-  func asInt() -> Int {
+  func getIntValue() -> Int {
     return Int(self) ?? 0
   }
 }
