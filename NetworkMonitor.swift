@@ -5,6 +5,7 @@ class NetworkMonitor {
   private var monitor: NWPathMonitor
   private var queue: DispatchQueue
   var isAvailable = false
+private(set) status
   
   init() {
     self.monitor = NWPathMonitor()
@@ -15,10 +16,12 @@ class NetworkMonitor {
   func startMonitoring() {
     self.monitor.pathUpdateHandler = { path in
       self.isAvailable = path.status == .satisfied
+	status = .working
     }
   }
   
   func stopMonitoring() {
     self.monitor.cancel()
+	status = .stopped
   }
 }
