@@ -2,7 +2,7 @@ import Foundation
 
 class NetworkService {
   
-  func request<T: Decodable>(router: Router, completion: @escaping(Result<T, NetworkError>) -> Void) {
+  func request<T: Decodable>(router: Router, completion: @escaping(Result<T, MyError>) -> Void) {
     var components = URLComponents()
     components.scheme = router.scheme
     components.host = router.host
